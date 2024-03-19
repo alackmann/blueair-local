@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:14
+    ports:
+      - "80:3000"
+    environment:
+      - MQTT_BROKER_DOCKER_URL=mqtt-broker
+      - MQTT_BROKER_DOCKER_PORT=1883
+      - MQTT_BROKER_USERNAME=user
+      - MQTT_BROKER_PASSWORD=password
+      - MQTT_BROKER_API_URL=api.blueair.io
+      - MQTT_BROKER_API_PORT=1883
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: sh -c "npm install && node index.js"
+
+  mqtt-broker:
+    image: emqx/emqx:latest
+    environment:
+      - EMQX_LOADED_PLUGINS="emqx_auth_username,emqx_management"
+      - EMQX_AUTH__USER__1__USERNAME=user
+      - EMQX_AUTH__USER__1__PASSWORD=password
+      - EMQX_LISTENER__TCP__EXTERNAL=1883
+      - EMQX_LISTENER__WS__EXTERNAL=8083
+    ports:
+      - "1883:1883" # MQTT protocol
+      - "18083:18083" # EMQ X Dashboard
+    volumes:
+      - emqx_config:/opt/emqx/etc
+      - emqx_log:/opt/emqx/log
+      - emqx_data:/opt/emqx/data
+volumes:
+  emqx_config:
+  emqx_log:
+  emqx_data:
+

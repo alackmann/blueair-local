@@ -1,0 +1,23 @@
+{
+  "name": "air-purifier-emulator",
+  "version": "1.0.0",
+  "description": "An Express application to emulate API responses for an Air Purifier device.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha ./test/testEndpoints.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mqtt": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.3.0"
+  }
+}
