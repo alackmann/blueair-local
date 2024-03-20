@@ -1,11 +1,12 @@
 {
-  "name": "air-purifier-emulator",
+  "name": "node-blueair-local",
   "version": "1.0.0",
   "description": "An Express application to emulate API responses for an Air Purifier device.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./test/testEndpoints.js"
+    "test": "mocha ./test/testEndpoints.js",
+    "docker-build": "docker build -t node-blueair-local:latest ."
   },
   "author": "",
   "license": "ISC",

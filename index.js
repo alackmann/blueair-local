@@ -7,14 +7,6 @@ const endpoints = require('./endpoints');
 const app = express();
 const port = 3000;
 
-// MQTT Connection details (from Endpoint 2)
-/*
-const mqttBrokerUrl = 'broker-gw-us.blueair.io';
-const mqttBrokerPort = 1883;
-const mqttBrokerUsername = 'device';
-const mqttBrokerPassword = 'rxdK95rPqB';
-*/
-
 /* a function that returns a config object named 'appConfig' that reads in the env vars from the container and sets internal variables for use in other parts of the application.
   Env vars:
     - MQTT_BROKER_DOCKER_URL
@@ -41,8 +33,6 @@ const mqttOptions = {
   clientId: 'node-blueair-local',
   reconnectPeriod: 1000, // Attempt to reconnect every 
 };
-console.log(appConfig);
-console.log(mqttOptions);
 
 // Connect to MQTT broker
 let mqttClient = mqtt.connect(mqttOptions);
@@ -75,5 +65,5 @@ app.use(bodyParser.json());
 app.use('/', endpoints(deviceCache, mqttClient, appConfig));
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
