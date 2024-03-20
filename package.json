@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha ./test/testEndpoints.js",
-    "docker-build": "docker build -t node-blueair-local:latest ."
+    "docker-build": "docker build -t alackmann/node-blueair-local:latest .",
+    "docker-push": "docker push alackmann/node-blueair-local:latest"
   },
   "author": "",
   "license": "ISC",
