@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mqtt = require('mqtt');
 const endpoints = require('./endpoints');
+const setupMqttSubscription = require('./mqtt_subscribe');
 
 const app = express();
 const port = 3000;
@@ -22,7 +23,9 @@ const appConfig = {
   mqttBrokerUsername: process.env.MQTT_BROKER_USERNAME,
   mqttBrokerPassword: process.env.MQTT_BROKER_PASSWORD,
   mqttBrokerApiUrl: process.env.MQTT_BROKER_API_URL || process.env.MQTT_BROKER_DOCKER_URL,
-  mqttBrokerApiPort: process.env.MQTT_BROKER_API_PORT || process.env.MQTT_BROKER_DOCKER_PORT
+  mqttBrokerApiPort: process.env.MQTT_BROKER_API_PORT || process.env.MQTT_BROKER_DOCKER_PORT,
+  openHabServerIp: process.env.OPENHAB_SERVER_IP,
+  openHabServerPort: process.env.OPENHAB_SERVER_PORT
 };
 
 const mqttOptions = {
@@ -39,6 +42,13 @@ let mqttClient = mqtt.connect(mqttOptions);
 
 mqttClient.on('connect', () => {
   console.log('Connected to MQTT broker');
+  // Set up MQTT subscription
+  if(appConfig.openHabServerIp && appConfig.openHabServerPort) {
+    setupMqttSubscription(mqttClient, deviceCache, appConfig);    // Set up MQTT subscription
+  } else {
+    console.log('OpenHab server IP and port not set, not setting up MQTT subscription');
+  }
+
 });
 
 mqttClient.on('reconnect', () => {
