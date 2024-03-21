@@ -1,0 +1,7 @@
+// Example BlueAir Sitemap items
+Frame label="Air Purifier - Parents Room" {
+  // Fan Speed Control for device UUID 2407776F42F07CD2
+  Switch item=BlueAir_2407776F42F07CD2_fanspeed icon="fan" label="Fan Speed" mappings=[0="Off", 1="Low", 2="Medium", 3="High"]
+  // LED Brightness Control for device UUID 2407776F42F07CD2
+  Slider item=BlueAir_2407776F42F07CD2_brightness icon="slider" label="LED Brightness" minValue=0 maxValue=4 step=1
+}
