@@ -7,6 +7,7 @@
     "start": "node index.js",
     "test": "mocha ./test/testEndpoints.js",
     "docker-build": "docker build -t alackmann/node-blueair-local:latest .",
+    "docker-buildx": "docker buildx build --platform linux/amd64,linux/arm64 -t alackmann/node-blueair-local:latest . --push",
     "docker-push": "docker push alackmann/node-blueair-local:latest"
   },
   "author": "",

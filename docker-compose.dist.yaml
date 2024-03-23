@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: node-blueair-local:latest
+    image: alackmann/node-blueair-local:latest
     ports:
       - "80:3000"
     environment:
@@ -10,7 +10,7 @@ services:
       - MQTT_BROKER_DOCKER_PORT=1883
       - MQTT_BROKER_USERNAME=user
       - MQTT_BROKER_PASSWORD=password
-      - MQTT_BROKER_API_URL=api.blueair.io
+      - MQTT_BROKER_API_URL=api.blueair.io #domain and port sent to devices. Seems to not like very custom domains
       - MQTT_BROKER_API_PORT=1883
       - OPENHAB_SERVER_IP=openhab.local
       - OPENHAB_SERVER_PORT=8080

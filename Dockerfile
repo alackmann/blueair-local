@@ -5,8 +5,7 @@ FROM node:14-alpine
 WORKDIR /usr/src/app
 
 # Copy only the necessary files to the container
-COPY index.js ./
-COPY endpoints.js ./
+COPY *.js ./
 
 # Copy package.json and package-lock.json (if available) to the container
 COPY package*.json ./
